@@ -1,10 +1,9 @@
 {
-    "/js/app.js": "/js/app.js",
     "/js/main.js": "/js/main.js",
-    "/css/app.css": "/css/app.css",
     "/css/main.css": "/css/main.css",
     "/images/avatar-2.jpg": "/images/avatar-2.jpg",
     "/images/avatar-3.jpg": "/images/avatar-3.jpg",
     "/images/avatar-4.jpg": "/images/avatar-4.jpg",
-    "/images/logo.png": "/images/logo.png"
+    "/images/logo.png": "/images/logo.png",
+    "/fontawesome/main.css": "/fontawesome/main.css"
 }

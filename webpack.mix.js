@@ -11,11 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-]);
+// mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
+//     require('postcss-import'),
+//     require('tailwindcss'),
+//     require('autoprefixer'),
+// ]);
 
 mix.styles([
     'resources/css/bootstrap/bootstrap.min.css',
@@ -34,6 +34,6 @@ mix.js([
 
 mix.copyDirectory('resources/fonts','public/css/fonts');
 mix.copyDirectory('resources/images','public/images');
-
+mix.copyDirectory('resources/fontawesome/css/all.min.css','public/fontawesome/main.css');
 
 mix.webpackConfig({ stats: { children: true, }, });

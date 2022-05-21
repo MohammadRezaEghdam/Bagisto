@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashbordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('Admin.index');
+// * Admin Panel
+Route::prefix('admin')->namespace('Admin')->group(function(){
+    Route::get('/', [AdminDashbordController::class, 'index'])->name('admin.panel');
 });
+
+
+// Route::get('/', function () {
+//     return view('Admin.index');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
