@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashbordController;
+use App\Http\Controllers\Admin\Market\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // * Admin Panel
-Route::prefix('admin')->namespace('Admin')->group(function(){
+Route::prefix('admin')->namespace('Admin')->group(function () {
     Route::get('/', [AdminDashbordController::class, 'index'])->name('admin.panel');
+    
+    
+    Route::prefix('market')->namespace('Market')->group(function () {
+        
+        // * Categories Routes
+        Route::prefix('category')->group(function () {
+
+            Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+            Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
+            Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
+            Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+            Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
+            Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+        });
+    });
 });
+
+
 
 
 // Route::get('/', function () {
@@ -27,4 +45,4 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
