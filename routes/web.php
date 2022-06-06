@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashbordController;
-use App\Http\Controllers\Admin\Market\CategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminDashbordController;
+use App\Http\Controllers\Admin\Market\CommentController;
+use App\Http\Controllers\Admin\Market\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,19 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
             Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
             Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+        });
+
+
+        // * Comments Routes
+        Route::prefix('comments')->group(function () {
+
+            Route::get('/', [CommentController::class, 'index'])->name('comment.index');
+            Route::get('/create', [CommentController::class, 'create'])->name('comment.create');
+            Route::get('/{comment}/show', [CommentController::class, 'show'])->name('comment.show');
+            Route::post('/', [CommentController::class, 'store'])->name('comment.store');
+            Route::get('/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
+            Route::put('/{comment}', [CommentController::class, 'update'])->name('comment.update');
+            Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
         });
     });
 });
