@@ -29,8 +29,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
             Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
             Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-            Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
-            Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+            Route::post('/{category}', [CategoryController::class, 'update'])->name('categories.update');
+            Route::get('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
         });
 
 

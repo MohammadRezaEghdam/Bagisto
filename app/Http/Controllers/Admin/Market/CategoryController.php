@@ -16,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('Admin.Market.category.index');
+        $categories = Category::all();
+        return view('Admin.Market.category.index', compact('categories'));
     }
 
     /**
@@ -26,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Admin.Market.Category.create');
+        $categories = Category::all();
+        return view('Admin.Market.Category.create', compact('categories'));
     }
 
     /**
@@ -37,7 +39,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        Category::create($request->all());
+        return redirect()->route('category.index')->with('success', __('message.category_success'));
     }
 
     /**
@@ -59,7 +62,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $category = Category::find($category->id);
+        $categories = Category::all();
+        return view('Admin.Market.Category.update', compact('category', 'categories'));
     }
 
     /**
@@ -71,7 +76,8 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->all());
+        return redirect()->route('category.index')->with('warning', __('message.category_update'));
     }
 
     /**
@@ -82,6 +88,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::find($category->id)->delete();
+        return back()->with('danger', __('message.category_deleted'));
     }
 }

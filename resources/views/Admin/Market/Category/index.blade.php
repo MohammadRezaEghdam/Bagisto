@@ -19,7 +19,8 @@
                         دسته بندی
                     </h5>
                 </section>
-
+                
+                <x-show-messages></x-show-messages>
                 <section class="d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom">
                     <a href="{{route('categories.create')}}" class="btn btn-info btn-sm">ایجاد دسته بندی</a>
                     <div class="width-16-rem">
@@ -31,43 +32,27 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th><span class="badge badge-info">{{count($categories)}}</span></th>
                                 <th>نام دسته بندی</th>
                                 <th>دسته والد</th>
                                 <th><i class="fa fa-cogs"></i>تنظیمات</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($categories as $category)
+                                
                             <tr>
-                                <th>1</th>
-                                <td>نمایشگر </td>
-                                <td>کالای الکترونیکی</td>
+                                <th>{{$category->id}}</th>
+                                <td>{{$category->name}} </td>
+                                <td>{{$category->parent == null ? "بدون دسته والد" : $category->parent}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit"><i
-                                            class="fa fa-trash-alt"></i>حذف</button>
+                                    <a href="{{route('categories.edit', $category)}}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>ویرایش</a>
+                                    <a class="btn btn-danger btn-sm" type="submit" href="{{ route('categories.destroy', $category->id) }}"><i
+                                            class="fa fa-trash-alt"></i>حذف</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>نمایشگر </td>
-                                <td>کالای الکترونیکی</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit"><i
-                                            class="fa fa-trash-alt"></i>حذف</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>نمایشگر </td>
-                                <td>کالای الکترونیکی</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>ویرایش</a>
-                                    <button class="btn btn-danger btn-sm" type="submit"><i
-                                            class="fa fa-trash-alt"></i>حذف</button>
-                                </td>
-                            </tr>
+                            @endforeach
+                            
                         </tbody>
                     </table>
                 </section>

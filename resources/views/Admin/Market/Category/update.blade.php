@@ -27,14 +27,14 @@
                 </section>
     
                 <section>
-                    <form action="{{route('categories.store')}}" method="POST">
+                    <form action="{{route('categories.update', $category)}}" method="POST">
                         @csrf
                         <section class="row">
     
                             <section class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">نام دسته</label>
-                                    <input name="name" type="text" class="form-control form-control-sm">
+                                    <input name="name" type="text" class="form-control form-control-sm" value="{{$category->name}}">
                                 </div>
                             </section>
     
@@ -43,9 +43,9 @@
                                     <label for="">دسته والد</label>
                                     <select name="parent" id="" class="form-control form-control-sm">
                                         <option value="">دسته را انتخاب کنید</option>
-                                        @foreach ($categories as $category)
+                                        @foreach ($categories as $item)
                                             
-                                        <option value="{{$category->name}}">{{$category->name}}</option>
+                                        <option value="{{$item->name}}" {{$item->name == $category->parent ? 'selected' : ''}} >{{$item->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
