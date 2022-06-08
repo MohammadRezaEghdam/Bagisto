@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashbordController;
 use App\Http\Controllers\Admin\Market\CommentController;
 use App\Http\Controllers\Admin\Market\CategoryController;
+use App\Http\Controllers\discount\CoupanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,23 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
         });
     });
+
+    // * Coupan routes
+    Route::prefix('discount')->namespace('discount')->group(function(){
+
+        // * Coupan routes
+        Route::prefix('coupan')->group(function(){
+            Route::get('/', [CoupanController::class, 'index'])->name('coupan.index');
+            Route::get('/create', [CoupanController::class, 'create'])->name('coupan.create');
+            Route::get('/{coupan}/show', [CoupanController::class, 'show'])->name('coupan.show');
+            Route::post('/', [CoupanController::class, 'store'])->name('coupan.store');
+            Route::get('/{coupan}/edit', [CoupanController::class, 'edit'])->name('coupan.edit');
+            Route::post('/{coupan}', [CoupanController::class, 'update'])->name('coupan.update');
+            Route::post('/{coupan}', [CoupanController::class, 'destroy'])->name('coupan.destroy');
+        });
+    });
 });
+
 
 
 

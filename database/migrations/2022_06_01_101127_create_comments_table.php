@@ -15,6 +15,10 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->text('body');
+            $table->boolean('approve')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +30,8 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints('user_id');
+        Schema::disableForeignKeyConstraints('product_id');
         Schema::dropIfExists('comments');
     }
 }

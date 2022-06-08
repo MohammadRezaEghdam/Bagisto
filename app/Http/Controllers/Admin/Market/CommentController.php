@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\Market;
 
 use App\Http\Controllers\Controller;
+use App\Models\Market\Comments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -14,7 +16,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return view('Admin.Market.Comment.index-comment');
+        $comments = Comments::all();
+        return view('Admin.Market.Comment.index-comment', compact('comments'));
     }
 
     /**
@@ -33,9 +36,15 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    // ! Implement product model here with Route model bainding 
     public function store(Request $request)
     {
-        //
+        Comments::create([
+            'user_id' => (Auth::user())->id,
+            // 'product_id' => $product->id,
+            'body' => $request->body,
+        ]);
     }
 
     /**
@@ -44,9 +53,10 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comments $comment)
     {
-        //
+        $comment = Comments::find($comment->id);
+        return view('Admin.Market.Comment.show-comment', compact('comment'));
     }
 
     /**
