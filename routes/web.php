@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\discount\CoupanController;
 use App\Http\Controllers\Admin\AdminDashbordController;
 use App\Http\Controllers\Admin\Market\CommentController;
 use App\Http\Controllers\Admin\Market\CategoryController;
-use App\Http\Controllers\discount\CoupanController;
+use App\Http\Controllers\Admin\Market\DeliveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,17 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
             Route::get('/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
             Route::put('/{comment}', [CommentController::class, 'update'])->name('comment.update');
             Route::delete('/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+        });
+        // * Delivary Routes
+        Route::prefix('delivery')->group(function () {
+
+            Route::get('/', [DeliveryController::class, 'index'])->name('delivery.index');
+            Route::get('/create', [DeliveryController::class, 'create'])->name('delivery.create');
+            Route::get('/{delivery}/show', [DeliveryController::class, 'show'])->name('delivery.show');
+            Route::post('/', [DeliveryController::class, 'store'])->name('delivery.store');
+            Route::get('/{delivery}/edit', [DeliveryController::class, 'edit'])->name('delivery.edit');
+            Route::post('/{delivery}', [DeliveryController::class, 'update'])->name('delivery.update');
+            Route::get('/{delivery}', [DeliveryController::class, 'destroy'])->name('delivery.destroy');
         });
     });
 
